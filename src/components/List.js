@@ -7,18 +7,18 @@ export default function List({ selectUser }) {
   const [isError, setError] = useState(false);
 
   useEffect(() => {
-    setError(false);
     setLoading(true);
     fetch(`${process.env.REACT_APP_DATA_URL}users.json`)
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
-        setLoading(false);
       })
       .catch((error) => {
         setError(true);
+      })
+      .finally(() => {
         setLoading(false);
-      });
+      })
   }, []);
 
   return (
